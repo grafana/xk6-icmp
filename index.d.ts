@@ -2,7 +2,7 @@
  * **ICMP protocol support for k6**
  *
  * > **⚠️ Warning**
- * > This is a **Proof of Concept** extension for k6. It is **not officially supported**.
+ * > This is an **experimental extension** for k6. It is **not officially supported yet**.
  * > We are actively working on it to make it officially supported in the future.
  *
  * **xk6-icmp** is a k6 extension that adds support for sending ICMP echo requests ({@link ping}) to measure network latency and availability.
