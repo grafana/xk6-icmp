@@ -24,9 +24,11 @@ jobs:
         persist-credentials: false
 
     - name: Generate Dockerfile
+      env:
+        XK6_VERSION: ${{ inputs.xk6-version }}
       run: |
         cat <<EOF > /tmp/Dockerfile.tester
-        FROM grafana/xk6:${{ inputs.xk6-version }}
+        FROM grafana/xk6:${XK6_VERSION}
 
         USER root
         RUN apk add --no-cache bash bats build-base
