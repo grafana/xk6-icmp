@@ -23,6 +23,12 @@ setup() {
   [ $status -eq 0 ]
 }
 
+
+@test 'blacklist.js' {
+  run $K6 run blacklist.js
+  [ $status -eq 0 ]
+}
+
 @test 'ip6.js' {
   run $K6 run ip6.js
   [ $status -eq 0 ]

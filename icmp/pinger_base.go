@@ -1,7 +1,6 @@
 package icmp
 
 import (
-	"context"
 	"crypto/rand"
 	"net"
 	"runtime"
@@ -79,13 +78,15 @@ func (r *pinger) resolve() error {
 
 	defer func() { r.addDurationMetrics(startedAt, r.metrics.icmpResolve) }()
 
-	dest, err := resolve(r.vu.Context(), r.opts.target, r.opts.preferredIPVersion)
+	ip, _, err := r.vu.State().GetAddrResolver().ResolveAddr(r.opts.target)
 	if err != nil {
+		r.addErrorMetrics()
+
 		return err
 	}
 
-	r.targetIP = dest
-	r.ip6 = dest.IP.To4() == nil
+	r.targetIP = &net.IPAddr{IP: ip}
+	r.ip6 = ip.To4() == nil
 
 	if r.ip6 {
 		r.ipver = "ip6"
@@ -188,33 +189,4 @@ func (r *pinger) setupPriv(src string) (*icmp.PacketConn, error) {
 	r.log.Debug("Listening for ICMP packets with elevated privileges")
 
 	return conn, nil
-}
-
-func resolve(ctx context.Context, target string, protocol string) (*net.IPAddr, error) {
-	ips, err := net.DefaultResolver.LookupIPAddr(ctx, target)
-	if err != nil {
-		return nil, err
-	}
-
-	isIP := net.ParseIP(target) != nil
-	force6 := protocol == "ip6"
-	force4 := protocol == "ip4"
-
-	for _, ip := range ips {
-		if isIP || (!force4 && !force6) {
-			return &ip, nil
-		}
-
-		is6 := ip.IP.To4() == nil
-
-		if force6 && is6 {
-			return &ip, nil
-		}
-
-		if force4 && !is6 {
-			return &ip, nil
-		}
-	}
-
-	return nil, errNoAddress
 }
