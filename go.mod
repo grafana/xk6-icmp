@@ -3,7 +3,7 @@ module github.com/grafana/xk6-icmp
 go 1.24.0
 
 require (
-	github.com/grafana/sobek v0.0.0-20251209155516-22d1085c20a8
+	github.com/grafana/sobek v0.0.0-20260121195222-d8d9202018c5
 	github.com/mstoykov/k6-taskqueue-lib v0.1.3
 	github.com/sirupsen/logrus v1.9.4
 	github.com/stretchr/testify v1.11.1
