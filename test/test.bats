@@ -19,6 +19,11 @@ setup() {
   [ $status -eq 0 ]
 }
 
+@test 'blacklist.test.js' {
+  run "$K6" run blacklist.test.js
+  [ $status -eq 0 ]
+}
+
 @test 'callback.test.js' {
   run "$K6" run callback.test.js
   [ $status -eq 0 ]
