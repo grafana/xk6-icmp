@@ -3,7 +3,7 @@ package icmp
 import (
 	"time"
 
-	"go.k6.io/k6/metrics"
+	"go.k6.io/k6/v2/metrics"
 )
 
 func (r *pinger) currentTags() *metrics.TagSet {

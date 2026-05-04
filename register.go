@@ -3,7 +3,7 @@ package icmp
 
 import (
 	"github.com/grafana/xk6-icmp/icmp"
-	"go.k6.io/k6/js/modules"
+	"go.k6.io/k6/v2/js/modules"
 )
 
 func init() {
