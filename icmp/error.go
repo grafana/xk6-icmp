@@ -9,7 +9,6 @@ var (
 	errUnexpectedMessage = errors.New("unexpected ICMP message")
 	errUnexpectedSource  = errors.New("unexpected source address")
 	errDeadlineExceeded  = errors.New("deadline exceeded")
-	errNoAddress         = errors.New("no suitable address found")
 	errInvalidType       = errors.New("invalid type")
 )
 
