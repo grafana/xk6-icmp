@@ -126,6 +126,7 @@ func newTestVUState(t *testing.T) *lib.State {
 func skipOnGitHubLinuxRunner(t *testing.T) {
 	t.Helper()
 
+	//nolint:forbidigo // reading CI env vars to skip a test is legitimate here
 	if os.Getenv("GITHUB_ACTIONS") == "true" && os.Getenv("RUNNER_OS") == "Linux" {
 		t.Skip("Skipping test in GitHub Actions Linux runner due to permission issues")
 	}
